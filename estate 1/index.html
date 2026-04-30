@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Prestige Estates | Luxury Real Estate</title>
+  <meta name="description" content="Premier luxury real estate agency offering exclusive properties, white-glove service, and market-leading expertise worldwide.">
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1e2a3e;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --gold: #c8a86b;
+      --gold-dark: #a8894e;
+      --dark: #0a0f1c;
+      --gray-50: #fafafc;
+      --gray-100: #f8fafc;
+      --gray-200: #eef2f6;
+      --gray-800: #1e293b;
+      --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 35px -12px rgba(0,0,0,0.12);
+      --transition: all 0.4s cubic-bezier(0.2, 0.95, 0.4, 1);
+    }
+
+    /* Sticky Header */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #1e2a3e, #c8a86b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e2a3e;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .hamburger {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(200,168,107,0.25);
+    }
+    .btn-primary:hover { background: var(--gold-dark); transform: translateY(-3px); }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+    .btn-outline:hover { background: var(--gold); color: white; }
+
+    /* Hero */
+    .hero {
+      min-height: 85vh;
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .hero-content h1 { font-size: 3.8rem; font-weight: 700; margin-bottom: 1rem; }
+    .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; }
+
+    /* Grids */
+    .property-grid, .team-grid, .services-grid, .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .card-img {
+      height: 260px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s;
+      cursor: pointer;
+    }
+    .card:hover .card-img { transform: scale(1.03); }
+
+    .card-content { padding: 1.5rem; }
+    .price { color: var(--gold); font-weight: 700; font-size: 1.3rem; margin: 0.5rem 0; }
+
+    /* Why Choose Us - Premium Restructured */
+    .why-container {
+      background: linear-gradient(135deg, #fefcf7 0%, #ffffff 100%);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .why-grid-premium {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .why-card-premium {
+      background: white;
+      padding: 2rem 1.5rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(200,168,107,0.15);
+      box-shadow: var(--shadow-sm);
+    }
+    .why-card-premium:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .why-card-premium i { font-size: 2.8rem; color: var(--gold); margin-bottom: 1rem; }
+    .why-card-premium h3 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .why-card-premium p { color: #475569; line-height: 1.5; }
+
+    /* Testimonials - Spacious & Visual */
+    .testimonial-section {
+      background: var(--gray-100);
+      border-radius: 2rem;
+      padding: 2rem;
+    }
+    .testimonial-slider-modern {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .testimonial-track-modern {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .testimonial-item-modern {
+      min-width: 100%;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .client-avatar-modern {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.2rem;
+      border: 4px solid var(--gold);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .client-name-modern { font-weight: 700; font-size: 1.3rem; margin-top: 0.5rem; }
+    .client-role-modern { color: var(--gold); font-size: 0.9rem; margin-bottom: 1.2rem; letter-spacing: 0.5px; }
+    .testimonial-text-modern { font-size: 1.1rem; line-height: 1.6; color: #2d3748; font-style: italic; max-width: 650px; margin: 0 auto; }
+    .slider-btn-modern {
+      background: var(--gold);
+      color: white;
+      border: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      margin: 0 0.6rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+    .slider-btn-modern:hover { background: var(--gold-dark); transform: scale(1.05); }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: var(--gray-100);
+      padding: 1.5rem;
+      border-radius: 60px;
+      align-items: center;
+    }
+    .filter-bar select, .filter-bar input {
+      padding: 0.75rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      background: white;
+      font-family: inherit;
+      flex: 1;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.25s;
+    }
+    .lightbox.active { visibility: visible; opacity: 1; }
+    .lightbox img { max-width: 90%; max-height: 80%; border-radius: 1rem; }
+    .close-lightbox {
+      position: absolute; top: 20px; right: 30px;
+      color: white; font-size: 40px; cursor: pointer;
+    }
+
+    /* Footer - Professional Organized */
+    .footer-premium {
+      background: #0a0f1c;
+      color: #cbd5e1;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+    .footer-premium-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .footer-premium-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .footer-col h4 { color: white; margin-bottom: 1.2rem; font-size: 1.1rem; position: relative; }
+    .footer-col h4:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .footer-col a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: inline-block;
+      margin: 0.5rem 0;
+      transition: 0.2s;
+    }
+    .footer-col a:hover { color: var(--gold); transform: translateX(3px); }
+    .social-icons-modern i {
+      font-size: 1.4rem;
+      margin-right: 1.2rem;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .social-icons-modern i:hover { color: var(--gold); transform: translateY(-3px); }
+    .newsletter-group-premium {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .newsletter-group-premium input {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 40px;
+      border: none;
+      background: #1e293b;
+      color: white;
+    }
+    .newsletter-group-premium button {
+      background: var(--gold);
+      border: none;
+      padding: 0 1.3rem;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copyright-premium {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      font-size: 0.85rem;
+    }
+
+    /* Property Details */
+    .property-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .map-placeholder {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed; top: 70px; left: -100%;
+        background: white; flex-direction: column;
+        width: 80%; height: 100vh; padding: 2rem;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+        transition: 0.3s; gap: 1.5rem;
+      }
+      .nav-links.active { left: 0; }
+      .hamburger { display: block; }
+      .hero-content h1 { font-size: 2.2rem; }
+      .property-detail-grid { grid-template-columns: 1fr; }
+      section { padding: 3rem 1rem; }
+      .filter-bar { flex-direction: column; border-radius: 28px; }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="nav-container">
+    <div class="logo">✨ Prestige Estates</div>
+    <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#" data-page="home">Home</a>
+      <a href="#" data-page="about">About</a>
+      <a href="#" data-page="services">Services</a>
+      <a href="#" data-page="properties">Properties</a>
+      <a href="#" data-page="property-details">Property Details</a>
+      <a href="#" data-page="gallery">Gallery</a>
+      <a href="#" data-page="contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main id="app-root"></main>
+
+<footer class="footer-premium">
+  <div class="footer-premium-container">
+    <div class="footer-premium-grid">
+      <div class="footer-col">
+        <h3 style="color:white; margin-bottom:1rem; font-size:1.5rem;">✨ Prestige Estates</h3>
+        <p>Redefining luxury real estate with integrity, innovation, and white-glove service since 2005.</p>
+        <div class="social-icons-modern" style="margin-top:1.2rem;">
+          <i class="fab fa-instagram"></i> <i class="fab fa-facebook-f"></i> <i class="fab fa-twitter"></i> <i class="fab fa-linkedin-in"></i>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#" data-page="home">Home</a><br>
+        <a href="#" data-page="about">About Us</a><br>
+        <a href="#" data-page="services">Services</a><br>
+        <a href="#" data-page="properties">Properties</a><br>
+        <a href="#" data-page="gallery">Gallery</a><br>
+        <a href="#" data-page="contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <p><i class="fas fa-phone-alt" style="width:25px;"></i> +234 812 163 8903</p>
+        <p><i class="fas fa-envelope"></i> hello@prestigeestates.com</p>
+        <p><i class="fas fa-map-pin"></i> 12 Park Avenue, Victoria Island, Lagos</p>
+        <p><i class="far fa-clock"></i> Mon-Sat: 9am - 7pm</p>
+      </div>
+      <div class="footer-col">
+        <h4>Exclusive Newsletter</h4>
+        <p>Get latest luxury listings & market insights.</p>
+        <div class="newsletter-group-premium">
+          <input type="email" id="footerNewsEmail" placeholder="Your email">
+          <button id="footerNewsBtn">→</button>
+        </div>
+        <p id="footerNewsMsg" style="font-size:12px; margin-top:8px;"></p>
+      </div>
+    </div>
+    <div class="copyright-premium">© 2025 Prestige Estates — Luxury Real Estate. All rights reserved. | Privacy Policy | Terms of Service</div>
+  </div>
+</footer>
+
+<script>
+  // ---------- ENHANCED DATA: 8 PROPERTIES (6+ images) ----------
+  const propertiesData = [
+    { id: 1, title: "Villa Serenity", price: 1250000, location: "Beverly Hills", type: "Villa", beds: 5, baths: 4, size: "4200 sqft", img: "https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Luxury modern villa with infinity pool, home cinema, and panoramic ocean views." },
+    { id: 2, title: "Downtown Loft", price: 780000, location: "Downtown", type: "Apartment", beds: 2, baths: 2, size: "1450 sqft", img: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Stylish urban loft with exposed brick and rooftop terrace." },
+    { id: 3, title: "Oceanview Estate", price: 3200000, location: "Malibu", type: "Estate", beds: 6, baths: 5, size: "6800 sqft", img: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Beachfront masterpiece with private beach access and helipad." },
+    { id: 4, title: "Modern Penthouse", price: 1950000, location: "Downtown", type: "Penthouse", beds: 3, baths: 3, size: "2100 sqft", img: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "City views, private terrace & smart glass walls." },
+    { id: 5, title: "Golden Mile Mansion", price: 4950000, location: "Miami Beach", type: "Estate", beds: 7, baths: 7, size: "9200 sqft", img: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Oceanfront mansion with spa and private dock." },
+    { id: 6, title: "The Sky Garden", price: 2850000, location: "Manhattan", type: "Penthouse", beds: 4, baths: 4, size: "3600 sqft", img: "https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Full-floor penthouse with private garden terrace." },
+    { id: 7, title: "Lakeside Retreat", price: 1490000, location: "Lake Como", type: "Villa", beds: 4, baths: 3, size: "3100 sqft", img: "https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Classic Italian villa with breathtaking lake views." },
+    { id: 8, title: "Tech Hub Loft", price: 895000, location: "Silicon Valley", type: "Apartment", beds: 3, baths: 2, size: "1800 sqft", img: "https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=800", desc: "Modern smart home near major tech campuses." }
+  ];
+
+  const teamMembers = [
+    { name: "Sarah Johnson", role: "CEO & Founder", img: "https://randomuser.me/api/portraits/women/68.jpg" },
+    { name: "Michael Chen", role: "Head of Sales", img: "https://randomuser.me/api/portraits/men/32.jpg" },
+    { name: "Elena Rossi", role: "Luxury Consultant", img: "https://randomuser.me/api/portraits/women/44.jpg" }
+  ];
+
+  const servicesData = [
+    { icon: "fas fa-home", title: "Property Buying", desc: "Personalized search & exclusive off-market access with AI-driven matching." },
+    { icon: "fas fa-chart-line", title: "Property Selling", desc: "Global marketing, professional staging & premium pricing strategy." },
+    { icon: "fas fa-building", title: "Property Management", desc: "Full-service management, maintenance & tenant placement." },
+    { icon: "fas fa-handshake", title: "Investment Consultation", desc: "Portfolio strategy, market analytics & wealth advisory." }
+  ];
+
+  // Enhanced testimonials with images and spacious design
+  const testimonialsData = [
+    { name: "Amanda Clarke", role: "CEO, TechVision", text: "Prestige Estates exceeded every expectation. Their global network found us a waterfront estate that we now call home. Seamless, professional, and truly luxury.", img: "https://randomuser.me/api/portraits/women/79.jpg" },
+    { name: "James Wilson", role: "Principal Investor", text: "The white-glove service from Prestige is unmatched. From initial consultation to closing, they handled everything with precision and care. Highly recommend.", img: "https://randomuser.me/api/portraits/men/52.jpg" },
+    { name: "Linda Martinez", role: "Interior Designer", text: "Working with Prestige has been a game-changer for my clients. Their properties are exclusive, and their team understands the nuance of high-end real estate.", img: "https://randomuser.me/api/portraits/women/90.jpg" }
+  ];
+
+  const galleryImages = [
+    "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=800"
+  ];
+
+  function createPropertyCard(p) {
+    return `<div class="card fade-in property-card" data-id="${p.id}">
+      <div class="card-img" style="background-image: url('${p.img}');"></div>
+      <div class="card-content">
+        <h3>${p.title}</h3>
+        <div class="price">$${p.price.toLocaleString()}</div>
+        <p><i class="fas fa-map-marker-alt"></i> ${p.location}</p>
+        <p>🛏 ${p.beds} beds | 🛁 ${p.baths} baths | 📐 ${p.size}</p>
+        <button class="btn btn-outline view-detail" data-id="${p.id}">View Details</button>
+      </div>
+    </div>`;
+  }
+
+  function attachDetailButtons() {
+    document.querySelectorAll('.view-detail').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.dataset.id);
+        const prop = propertiesData.find(p => p.id === id);
+        if(prop) {
+          sessionStorage.setItem('detailProp', JSON.stringify(prop));
+          navigateToPage('property-details');
+        }
+      });
+    });
+  }
+
+  function navigateToPage(pageId) {
+    history.pushState({}, '', `#${pageId}`);
+    loadPage(pageId);
+  }
+
+  function loadPage(pageId) {
+    const container = document.getElementById('app-root');
+    if (!container) return;
+    window.scrollTo(0,0);
+    if (pageId === 'home') renderHome(container);
+    else if (pageId === 'about') renderAbout(container);
+    else if (pageId === 'services') renderServices(container);
+    else if (pageId === 'properties') renderProperties(container);
+    else if (pageId === 'property-details') renderPropertyDetails(container);
+    else if (pageId === 'gallery') renderGallery(container);
+    else if (pageId === 'contact') renderContact(container);
+    else renderHome(container);
+    attachFadeObserver();
+  }
+
+  function renderHome(container) {
+    container.innerHTML = `
+      <section class="hero"><div class="hero-content"><h1>Find Your Dream Property Today</h1><p>Discover unmatched elegance & premium locations worldwide</p><div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center;"><button class="btn btn-primary" data-nav="properties">View Listings</button> <button class="btn btn-outline" style="background:white;color:#111;" data-nav="contact">Contact Us</button></div></div></section>
+      <section><h2 class="fade-in">🔍 Quick Search</h2><div class="filter-bar fade-in"><input type="text" id="quickLoc" placeholder="Location"><select id="quickType"><option value="">All Types</option><option>Villa</option><option>Apartment</option><option>Estate</option><option>Penthouse</option></select><button id="quickSearchHomeBtn" class="btn-primary btn">Search</button></div></section>
+      <section><h2 class="fade-in">🏡 Featured Properties</h2><div id="featuredGrid" class="property-grid"></div></section>
+      <section><h2 class="fade-in">Why Prestige Estates — The Trusted Leader</h2><div class="why-container"><div class="why-grid-premium"><div class="why-card-premium"><i class="fas fa-crown"></i><h3>25+ Years of Excellence</h3><p>Decades of market leadership, $2.5B+ in luxury transactions, and 98% client satisfaction.</p></div><div class="why-card-premium"><i class="fas fa-globe-americas"></i><h3>Global Concierge Access</h3><p>Off-market estates in 20+ countries — we unlock properties others can't find.</p></div><div class="why-card-premium"><i class="fas fa-chart-line"></i><h3>Data-Driven Valuation</h3><p>AI market analytics ensuring maximum ROI for sellers and smart investments for buyers.</p></div><div class="why-card-premium"><i class="fas fa-hand-sparkles"></i><h3>White-Glove Service</h3><p>Personalized attention from showcase to closing, plus lifestyle management.</p></div></div></div></section>
+      <section class="testimonial-section"><h2 class="fade-in">Trusted by Global Elite</h2><div class="testimonial-slider-modern"><div class="testimonial-track-modern" id="testTrackModern"></div><div style="text-align:center; margin-top:2rem;"><button class="slider-btn-modern" id="prevTestBtnM">←</button><button class="slider-btn-modern" id="nextTestBtnM">→</button></div></div></section>
+    `;
+    const featured = propertiesData.slice(0,6);
+    document.getElementById('featuredGrid').innerHTML = featured.map(p => createPropertyCard(p)).join('');
+    // Testimonials with spacious layout
+    const trackDiv = document.getElementById('testTrackModern');
+    trackDiv.innerHTML = testimonialsData.map(t => `
+      <div class="testimonial-item-modern">
+        <img src="${t.img}" class="client-avatar-modern" alt="${t.name}">
+        <div class="client-name-modern">${t.name}</div>
+        <div class="client-role-modern">${t.role}</div>
+        <div class="testimonial-text-modern">“${t.text}”</div>
+        <div style="color:var(--gold); margin-top:1.2rem; font-size:1.1rem;">★★★★★</div>
+      </div>
+    `).join('');
+    let idx = 0;
+    const updateTrack = () => { trackDiv.style.transform = `translateX(-${idx * 100}%)`; };
+    document.getElementById('prevTestBtnM')?.addEventListener('click',()=>{ idx = (idx-1+testimonialsData.length)%testimonialsData.length; updateTrack(); });
+    document.getElementById('nextTestBtnM')?.addEventListener('click',()=>{ idx = (idx+1)%testimonialsData.length; updateTrack(); });
+    document.getElementById('quickSearchHomeBtn')?.addEventListener('click',()=>{
+      sessionStorage.setItem('filterLoc', document.getElementById('quickLoc').value);
+      sessionStorage.setItem('filterType', document.getElementById('quickType').value);
+      navigateToPage('properties');
+    });
+    attachDetailButtons();
+  }
+
+  function renderAbout(container) { container.innerHTML = `<section><h2>About Prestige Estates</h2><p style="font-size:1.1rem;">Since 2005, we've been the hallmark of luxury real estate.</p><div class="why-grid-premium"><div class="why-card-premium"><i class="fas fa-bullseye"></i><h3>Mission</h3><p>To transform real estate experiences through integrity and client-centric excellence.</p></div><div class="why-card-premium"><i class="fas fa-eye"></i><h3>Vision</h3><p>To be the world's most trusted luxury real estate brand.</p></div></div><h3>Leadership</h3><div class="team-grid" id="teamGrid"></div></section>`;
+    document.getElementById('teamGrid').innerHTML = teamMembers.map(m => `<div class="card"><img src="${m.img}" style="width:100%;height:220px;object-fit:cover;"><div class="card-content"><h3>${m.name}</h3><p style="color:var(--gold);">${m.role}</p></div></div>`).join('');
+  }
+  function renderServices(container) { container.innerHTML = `<section><h2>Our Premium Services</h2><div class="services-grid" id="servicesGrid"></div></section>`;
+    document.getElementById('servicesGrid').innerHTML = servicesData.map(s => `<div class="card"><div class="card-content"><i class="${s.icon}" style="font-size:2.8rem;color:var(--gold);"></i><h3>${s.title}</h3><p>${s.desc}</p></div></div>`).join(''); }
+  function renderProperties(container) {
+    const filterLoc = sessionStorage.getItem('filterLoc') || '';
+    const filterType = sessionStorage.getItem('filterType') || '';
+    sessionStorage.removeItem('filterLoc'); sessionStorage.removeItem('filterType');
+    container.innerHTML = `<section><h2>Exclusive Properties</h2><div class="filter-bar"><input id="propLocation" placeholder="Location" value="${filterLoc}"><select id="propType"><option value="">All Types</option><option>Villa</option><option>Apartment</option><option>Estate</option><option>Penthouse</option></select><button id="filterPropsBtn" class="btn-primary btn">Filter</button></div><div id="propGrid" class="property-grid"></div></section>`;
+    const apply = () => {
+      let filtered = propertiesData.filter(p => (!document.getElementById('propLocation').value || p.location.toLowerCase().includes(document.getElementById('propLocation').value.toLowerCase())) && (!document.getElementById('propType').value || p.type === document.getElementById('propType').value));
+      document.getElementById('propGrid').innerHTML = filtered.map(card => createPropertyCard(card)).join('');
+      attachDetailButtons();
+    };
+    document.getElementById('filterPropsBtn').addEventListener('click', apply);
+    if(filterType) setTimeout(()=>{ document.getElementById('propType').value = filterType; apply(); },20);
+    else apply();
+  }
+  function renderPropertyDetails(container) {
+    const stored = sessionStorage.getItem('detailProp');
+    const prop = stored ? JSON.parse(stored) : propertiesData[0];
+    container.innerHTML = `<section><h2>${prop.title}</h2><div class="property-detail-grid"><div><img id="detailMainImage" src="${prop.img}" style="width:100%; border-radius:1rem;"><div style="margin-top:1rem; text-align:center;"><button id="pdPrev" class="slider-btn-modern">←</button><button id="pdNext" class="slider-btn-modern">→</button></div><div class="map-placeholder mt-3"><i class="fas fa-map-marker-alt"></i> Prime Location: ${prop.location}</div></div><div><p>${prop.desc}</p><ul style="margin:1rem 0; list-style:none;"><li>🏠 ${prop.beds} Bedrooms</li><li>🛁 ${prop.baths} Bathrooms</li><li>📐 ${prop.size}</li><li>🔒 24/7 Security + Concierge</li></ul><h3>Request private tour</h3><form id="inquiryFormDetail"><input placeholder="Full Name" required><input placeholder="Email" required><textarea placeholder="Message"></textarea><button type="submit" class="btn-primary">Send Inquiry</button></form></div></div></section>`;
+    const images = [prop.img, ...galleryImages.slice(0,4)];
+    let idx = 0;
+    const imgEl = document.getElementById('detailMainImage');
+    document.getElementById('pdPrev')?.addEventListener('click',()=>{ idx = (idx-1+images.length)%images.length; imgEl.src = images[idx]; });
+    document.getElementById('pdNext')?.addEventListener('click',()=>{ idx = (idx+1)%images.length; imgEl.src = images[idx]; });
+    document.getElementById('inquiryFormDetail')?.addEventListener('submit',(e)=>{ e.preventDefault(); alert("✅ Tour request sent! Our agent will contact you."); e.target.reset(); });
+  }
+  function renderGallery(container) {
+    container.innerHTML = `<section><h2>Luxury Gallery</h2><div class="gallery-grid" id="galleryGrid"></div><div id="lightbox" class="lightbox"><img id="lightboxImg"><span class="close-lightbox">&times;</span></div></section>`;
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = galleryImages.map(img => `<div class="card"><div class="card-img" style="background-image:url('${img}'); cursor:pointer;" data-img="${img}"></div></div>`).join('');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.card-img').forEach(el => { el.addEventListener('click', () => { lbImg.src = el.dataset.img; lightbox.classList.add('active'); }); });
+    document.querySelector('.close-lightbox')?.addEventListener('click',()=> lightbox.classList.remove('active'));
+    lightbox?.addEventListener('click',(e)=>{ if(e.target===lightbox) lightbox.classList.remove('active'); });
+  }
+  function renderContact(container) {
+    container.innerHTML = `<section><h2>Contact Our Concierge</h2><div style="display:flex; flex-wrap:wrap; gap:2rem;"><form id="contactPageForm" style="flex:1;"><input placeholder="Full Name" required><input type="email" placeholder="Email" required><textarea placeholder="Your message"></textarea><button class="btn-primary">Send Message</button><p id="contactFeedback"></p></form><div style="flex:1;"><h3>📍 Visit Us</h3><p><i class="fas fa-phone"></i> +234 812 163 8903</p><p>12 Park Avenue, Victoria Island, Lagos, Nigeria</p><div style="height:200px;background:#eef2f6;border-radius:1rem;display:flex;align-items:center;justify-content:center;">📌 Premium Location Map</div></div></div></section>`;
+    document.getElementById('contactPageForm')?.addEventListener('submit', (e) => { e.preventDefault(); document.getElementById('contactFeedback').innerHTML = "✅ Message delivered. We'll reply within 24h."; e.target.reset(); });
+  }
+  function attachFadeObserver() {
+    const fades = document.querySelectorAll('.fade-in');
+    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    fades.forEach(el => obs.observe(el));
+  }
+  function globalEventBindings() {
+    document.getElementById('hamburger')?.addEventListener('click', () => document.getElementById('navLinks').classList.toggle('active'));
+    document.querySelectorAll('[data-page]').forEach(link => {
+      link.addEventListener('click', (e) => { e.preventDefault(); const page = link.getAttribute('data-page'); if(page) navigateToPage(page); document.getElementById('navLinks')?.classList.remove('active'); });
+    });
+    document.querySelectorAll('[data-nav]').forEach(btn => { btn.addEventListener('click', (e) => { const page = btn.getAttribute('data-nav'); if(page) navigateToPage(page); }); });
+    document.getElementById('footerNewsBtn')?.addEventListener('click',()=>{ const email = document.getElementById('footerNewsEmail'); if(email.value.includes('@')) { document.getElementById('footerNewsMsg').innerText = '✓ Subscribed!'; email.value=''; } else document.getElementById('footerNewsMsg').innerText = 'Valid email please.'; });
+  }
+  window.addEventListener('DOMContentLoaded', () => { const hash = window.location.hash.slice(1) || 'home'; loadPage(hash); globalEventBindings(); });
+  window.addEventListener('popstate', () => { const hash = window.location.hash.slice(1) || 'home'; loadPage(hash); });
+</script>
+</body>
+</html>
